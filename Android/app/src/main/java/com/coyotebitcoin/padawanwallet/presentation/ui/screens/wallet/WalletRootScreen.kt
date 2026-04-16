@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -288,7 +289,7 @@ fun BalanceBox(
                         ),
                         shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                         border = standardBorder,
-                        modifier = Modifier.width(134.dp),
+                        modifier = Modifier.widthIn(min = 134.dp),
                         enabled = !currentlySyncing
                     ) {
                         Row(
