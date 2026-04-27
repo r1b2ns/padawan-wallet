@@ -30,14 +30,14 @@ extension Descriptor {
         publicKey: DescriptorPublicKey,
         fingerprint: String,
         network: Network
-    ) -> (descriptor: Descriptor, changeDescriptor: Descriptor) {
-        let descriptor = Descriptor.newBip84Public(
+    ) throws -> (descriptor: Descriptor, changeDescriptor: Descriptor) {
+        let descriptor = try Descriptor.newBip84Public(
             publicKey: publicKey,
             fingerprint: fingerprint,
             keychainKind: .external,
             network: network
         )
-        let changeDescriptor = Descriptor.newBip84Public(
+        let changeDescriptor = try Descriptor.newBip84Public(
             publicKey: publicKey,
             fingerprint: fingerprint,
             keychainKind: .internal,

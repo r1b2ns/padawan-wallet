@@ -13,7 +13,11 @@ struct PadawanTestsConfiguration {
     }
     
     static var bdkClient: BDKClient {
-        shouldUseMock ? .mock : .live
+        #if DEBUG
+        return shouldUseMock ? .mock : .live
+        #else
+        return .live
+        #endif
     }
     
     static func setup() {

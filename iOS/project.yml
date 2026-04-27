@@ -6,7 +6,7 @@ options:
 packages:
   BitcoinDevKit:
     url: https://github.com/bitcoindevkit/bdk-swift
-    version: 2.0.0
+    version: 2.3.1
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess.git
     version: 4.2.2
@@ -31,7 +31,7 @@ targets:
       Debug: PadawanWallet/Resources/Config/AppConfig.xcconfig
       Release: PadawanWallet/Resources/Config/AppConfig.xcconfig
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: com.coyotebitcoin.padawanwallet
+      PRODUCT_BUNDLE_IDENTIFIER: com.coyotebitcoin.padawanwallet.ios
       DEVELOPMENT_TEAM: $(DEVELOPMENT_TEAM)
       APP_DISPLAY_NAME: "PadawanWallet"
       MARKETING_VERSION: $(MARKETING_VERSION)
@@ -81,6 +81,7 @@ targets:
                     exit 1
                 fi
         name: SwiftGen
+        basedOnDependencyAnalysis: false
 
   PadawanWalletTests:
     type: bundle.unit-test
