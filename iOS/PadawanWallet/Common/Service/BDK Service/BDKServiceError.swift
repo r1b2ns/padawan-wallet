@@ -16,8 +16,11 @@ enum BDKServiceError: Error {
     case needResync
     case clientNotStarted
     case notSigned
-    
-    var localizedDescription: String {
+}
+
+extension BDKServiceError: LocalizedError {
+
+    var errorDescription: String? {
         switch self {
         case .dbNotFound:
             return "Database not found"

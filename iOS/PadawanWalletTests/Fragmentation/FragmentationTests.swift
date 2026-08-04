@@ -407,17 +407,26 @@ struct FragmentationTests {
         #expect(pathData.count == 0)
     }
     
-    @Test("LanguageViewModel: Asks for confirmation for PT, ES, and FR")
+    @Test("LanguageViewModel: Applies PT, ES and FR immediately")
     func testLanguageSelectMultiple() {
+        let originalLanguage = LanguageManager.shared.currentLanguage
+        let originalLanguageChoice = Session.shared.languageChoice
+        defer {
+            LanguageManager.shared.setLanguage(originalLanguage)
+            Session.shared.languageChoice = originalLanguageChoice
+        }
+
         let viewModel = LanguageThemeScreenViewModel()
         let languagesToTest: [PadawanLanguage] = [.portuguese, .spanish, .french]
-        
+
         for lang in languagesToTest {
             viewModel.selectedLanguage = .english
             viewModel.fullScreenCover = nil
             viewModel.selectItem(lang)
-            
-            #expect(viewModel.fullScreenCover != nil)
+
+            #expect(viewModel.selectedLanguage == lang)
+            #expect(LanguageManager.shared.currentLanguage == lang)
+            #expect(viewModel.fullScreenCover == nil)
         }
     }
     

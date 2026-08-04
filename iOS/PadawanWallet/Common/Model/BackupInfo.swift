@@ -25,12 +25,37 @@ struct BackupInfo: Codable, Equatable {
 }
 
 #if DEBUG
+    import BitcoinDevKit
+
     extension BackupInfo {
-        static var mock = Self(
-            mnemonic:
-                "space echo position wrist orient erupt relief museum myself grain wisdom tumble",
-            descriptor: "",
-            changeDescriptor: ""
-        )
+        private static let mockMnemonic =
+            "space echo position wrist orient erupt relief museum myself grain wisdom tumble"
+
+        private static let mockNetwork: Network = .signet
+
+        static var mock = makeMock()
+
+        private static func makeMock() -> Self {
+            do {
+                let mnemonic = try Mnemonic.fromString(mnemonic: mockMnemonic)
+                let secretKey = DescriptorSecretKey(
+                    network: mockNetwork,
+                    mnemonic: mnemonic,
+                    password: nil
+                )
+                let descriptors = Descriptor.createDescriptors(
+                    secretKey: secretKey,
+                    network: mockNetwork
+                )
+
+                return Self(
+                    mnemonic: mnemonic.description,
+                    descriptor: descriptors.descriptor.toStringWithSecret(),
+                    changeDescriptor: descriptors.changeDescriptor.toStringWithSecret()
+                )
+            } catch {
+                fatalError("BackupInfo.mock: invalid mock mnemonic - \(error)")
+            }
+        }
     }
 #endif

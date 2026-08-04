@@ -22,12 +22,13 @@ struct BDKClientTests {
         try client.importWallet("omit arm chunk harbor path unfair coil radar stairs unfair raise memory")
     }
     
-    @Test("Should throw BadWalletWordCount when importing a wallet with less than 12 words")
+    @Test("Should throw invalidSeed when importing a wallet with less than 12 words")
     func testBadImportWallet() throws {
         #expect(performing: {
             try client.importWallet("omit arm chunk harbor path unfair coil radar stairs unfair raise")
         }, throws: { error in
-            error.localizedDescription.contains("BadWordCount")
+            guard case BDKServiceError.invalidSeed = error else { return false }
+            return true
         })
     }
     
