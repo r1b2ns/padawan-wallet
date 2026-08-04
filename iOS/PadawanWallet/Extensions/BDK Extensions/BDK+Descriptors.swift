@@ -16,12 +16,12 @@ extension Descriptor {
         let descriptor = Descriptor.newBip84(
             secretKey: secretKey,
             keychainKind: .external,
-            network: network
+            networkKind: network.kind
         )
         let changeDescriptor = Descriptor.newBip84(
             secretKey: secretKey,
             keychainKind: .internal,
-            network: network
+            networkKind: network.kind
         )
         return (descriptor, changeDescriptor)
     }
@@ -35,13 +35,13 @@ extension Descriptor {
             publicKey: publicKey,
             fingerprint: fingerprint,
             keychainKind: .external,
-            network: network
+            networkKind: network.kind
         )
         let changeDescriptor = try Descriptor.newBip84Public(
             publicKey: publicKey,
             fingerprint: fingerprint,
             keychainKind: .internal,
-            network: network
+            networkKind: network.kind
         )
         return (descriptor, changeDescriptor)
     }

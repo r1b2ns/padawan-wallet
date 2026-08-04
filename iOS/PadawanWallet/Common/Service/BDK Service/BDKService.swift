@@ -60,7 +60,7 @@ final class BDKService {
         do {
             let mnemonic = try Mnemonic.fromString(mnemonic: _seed)
             let secretKey = DescriptorSecretKey(
-                network: network,
+                networkKind: network.kind,
                 mnemonic: mnemonic,
                 password: nil
             )
@@ -92,8 +92,11 @@ final class BDKService {
     
     func loadWalletFromBackup() throws {
         let backupInfo = try keyClient.getBackupInfo()
-        let descriptor = try Descriptor(descriptor: backupInfo.descriptor, network: network)
-        let changeDescriptor = try Descriptor(descriptor: backupInfo.changeDescriptor, network: network)
+        let descriptor = try Descriptor(descriptor: backupInfo.descriptor, networkKind: network.kind)
+        let changeDescriptor = try Descriptor(
+            descriptor: backupInfo.changeDescriptor,
+            networkKind: network.kind
+        )
         try loadWallet(descriptor: descriptor, changeDescriptor: changeDescriptor, network: network)
     }
     

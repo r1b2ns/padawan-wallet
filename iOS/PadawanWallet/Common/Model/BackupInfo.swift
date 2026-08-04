@@ -39,7 +39,7 @@ struct BackupInfo: Codable, Equatable {
             do {
                 let mnemonic = try Mnemonic.fromString(mnemonic: mockMnemonic)
                 let secretKey = DescriptorSecretKey(
-                    network: mockNetwork,
+                    networkKind: mockNetwork.kind,
                     mnemonic: mnemonic,
                     password: nil
                 )

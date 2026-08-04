@@ -6,7 +6,7 @@ options:
 packages:
   BitcoinDevKit:
     url: https://github.com/bitcoindevkit/bdk-swift
-    version: 2.3.1
+    version: 3.0.0
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess.git
     version: 4.2.2
